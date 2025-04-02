@@ -31,7 +31,7 @@ try:
 
     bb = list(map(int, armstrong_list))
     
-    print(*bb,sep=',')
+    print(*bb,sep=' ')
 
     if n is None:
         print("none")
