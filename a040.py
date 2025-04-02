@@ -7,7 +7,7 @@ try:
 
     armstrong_list = []
 
-    n = None
+    n = ""
 
     for i in range(int_num1, int_num2+1):
         n = 0
@@ -26,14 +26,13 @@ try:
         aa = int(i)       
         if result == aa:
             #print(str_num)
-            n == 1
+            n == "a"
             armstrong_list.append(str_num);
 
     bb = list(map(int, armstrong_list))
     
     print(*bb,sep=' ')
-
-    if n is None:
+    if n != "a":
         print("none")
         
 
