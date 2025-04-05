@@ -7,8 +7,6 @@ try:
 
     armstrong_list = []
 
-    n = ""
-
     for i in range(int_num1, int_num2+1):
         n = 0
         str_num = str(i)
@@ -25,15 +23,14 @@ try:
         result = sum(x**num_long for x in int_one)
         aa = int(i)       
         if result == aa:
-            #print(str_num)
-            n == "a"
+            #print(str_num)            
             armstrong_list.append(str_num);
 
-    bb = list(map(int, armstrong_list))
-    
-    print(*bb,sep=' ')
-    if n != "a":
+    bb = list(map(int, armstrong_list))    
+    if bb == []:
         print("none")
+    print(*bb,sep=' ')
+    
         
 
 except Exception as e:
