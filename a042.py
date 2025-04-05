@@ -1,11 +1,8 @@
-while True:    
+while True:
     try:
         num = int(input())
-        bb = num-2
-        aa = (num*num-bb)
+        bb = num - 2
+        aa = (num * num - bb)
         print(aa)
-
-    except Exception as e:
-        print(e)
-
-    
+    except EOFError:
+        break  # 沒有輸入就結束迴圈
