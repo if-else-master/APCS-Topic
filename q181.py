@@ -1,10 +1,10 @@
-number = list(input().split()) #car light
+red_time, green_time = map(int, input().split())
 kid = int(input()) #how many kid
 kid_sec = list(map(int,input().split())) #What time kid run
 all_time = []
 
-a = int(number[1]) #green light
-b = int(number[0]) #red light
+a = green_time
+b = red_time
 
 
 red_green = a+b #red+green light
@@ -12,29 +12,17 @@ red_green = a+b #red+green light
 for i in range(kid):
     if red_green > kid_sec[i]:
        all_time.append(red_green-kid_sec[i])
-
-for h in range(kid):
-    if red_green < kid_sec[h]:
-        time = int(kid_sec[h] / red_green)
+    else:
+        time = int(kid_sec[i] / red_green)
         much_time = time * red_green
         #print(much_time)
-        if much_time + b > kid_sec[h]:
+        if much_time + b > kid_sec[i]:
             all_time.append(0)
         else:
             all_t = much_time+red_green
-            all_time.append(all_t-kid_sec[h])
+            all_time.append(all_t-kid_sec[i])
     
-
-
-
-if sum(all_time) == 1005:
-    print(855)
-elif sum(all_time) == 539:
-    print(375)
-elif sum(all_time) == 425:
-    print(242)
-else:
-    print(sum(all_time))
+print(sum(all_time))
     
 
 
