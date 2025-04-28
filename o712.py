@@ -1,8 +1,5 @@
 M, N, j, r, c = list(map(int, input().split()))
 MN_list = []
-pass_list = []
-ans = []
-
 for i in range(M):
     MN = list(map(int, input().split()))
     if len(MN) != N:
@@ -10,74 +7,65 @@ for i in range(M):
         break
     MN_list.append(MN)
 
-temp = MN_list[r][c]
-tmp = 1
+#格子的數值-1 lat -1
+#格子數值相加 lat + lat score
+#走過要+1 dam
+
+lat = MN_list[r][c]
+score = 0
 dam = 0
+pass_list = []
+pass_list.append(lat)
+MN_list[r][c] = lat-1
+score = score+lat
+dam+=1
 
-while tmp != 0:
-    if MN_list[r][c] == 0:  # 如果當前格子的寶石數量為 0，終止
-        break
-
-    k = 1
-    # 如果當前格子可行且不等於 -1，且temp 不是 j 的倍數，則繼續
-    if c + k < N and MN_list[r][c + k] != -1 and temp % j != 0:
-        tmp = MN_list[r][c + k]
-        temp = temp + MN_list[r][c + k]                
-        ans.append(temp)
-        pass_list.append(MN_list[r][c + k])
-        MN_list[r][c + k] = MN_list[r][c + k] - 1
+while lat != 0:
+    if c+1<N and MN_list[r][c+1] != -1 and score%j !=0:
+        lat = MN_list[r][c+1]
+        pass_list.append(MN_list[r][c+1])
+        score = score+MN_list[r][c+1]
+        if MN_list[r][c+1] > 0:
+            MN_list[r][c+1] = lat-1
+            dam+=1
         r = r
-        c = c + k
-        dam += 1
+        c = c+1
+        #print(pass_list,"a")
     else:
-        # 如果 temp 是 j 的倍數，向右轉 90 度（只改變檢查順序）
-        if temp % j == 0:
-            # 嘗試四個方向，右、下、左、上
-            for _ in range(4):
-                if c + k < N and MN_list[r][c + k] != -1:  # 向右
-                    tmp = MN_list[r][c + k]
-                    temp = temp + MN_list[r][c + k]                
-                    ans.append(temp)
-                    pass_list.append(MN_list[r][c + k])
-                    MN_list[r][c + k] = MN_list[r][c + k] - 1
-                    r = r
-                    c = c + k
-                    dam += 1
-                    break
-                elif r + k < M and MN_list[r + k][c] != -1:  # 向下
-                    tmp = MN_list[r + k][c]
-                    temp = temp + MN_list[r + k][c]        
-                    ans.append(temp)
-                    pass_list.append(MN_list[r + k][c])
-                    MN_list[r + k][c] = MN_list[r + k][c] - 1
-                    r = r + k
+        for _ in range(4):
+            if r+1<M and MN_list[r+1][c] != -1:
+                while r+1<M and MN_list[r+1][c] != -1:
+                    lat = MN_list[r+1][c]
+                    pass_list.append(MN_list[r+1][c])
+                    score = score+MN_list[r+1][c]
+                    if MN_list[r+1][c] > 0:
+                        MN_list[r+1][c] = lat-1
+                        dam+=1
+                    r = r+1
                     c = c
-                    dam += 1
-                    break
-                elif c - k >= 0 and MN_list[r][c - k] != -1:  # 向左
-                    tmp = MN_list[r][c - k]
-                    temp = temp + MN_list[r][c - k]     
-                    ans.append(temp)
-                    pass_list.append(MN_list[r][c - k])
-                    MN_list[r][c - k] = MN_list[r][c - k] - 1
+                    #print(pass_list,"b")
+            elif c-1>=0 and MN_list[r][c-1] != -1:
+                while c-1>=0 and MN_list[r][c-1] != -1:
+                    lat = MN_list[r][c-1]
+                    pass_list.append(MN_list[r][c-1])
+                    score = score+MN_list[r][c-1]
+                    if MN_list[r][c-1] > 0:
+                        MN_list[r][c-1] = lat-1
+                        dam+=1            
                     r = r
-                    c = c - k
-                    dam += 1
-                    break
-                elif r - k >= 0 and MN_list[r - k][c] != -1:  # 向上
-                    tmp = MN_list[r - k][c]
-                    temp = temp + MN_list[r - k][c]        
-                    ans.append(temp)
-                    pass_list.append(MN_list[r - k][c])
-                    MN_list[r - k][c] = MN_list[r - k][c] - 1
-                    r = r - k
+                    c = c-1
+                    #print(pass_list,"c")
+            elif r-1>=0 and MN_list[r-1][c] != -1:
+                while r-1>=0 and MN_list[r-1][c] != -1:
+                    lat = MN_list[r-1][c]
+                    pass_list.append(MN_list[r-1][c])
+                    score = score+MN_list[r-1][c]
+                    if MN_list[r-1][c] > 0:
+                        MN_list[r-1][c] = lat-1
+                        dam+=1
+                    r = r-1
                     c = c
-                    dam += 1
-                    break
-            else:
-                # 四個方向都無法走，結束
-                break
-
+                    #print(pass_list,"d")
+    
 print(dam)
-print(ans)
-print(pass_list)
+#print(pass_list)
