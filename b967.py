@@ -13,8 +13,7 @@ ans = []
 
 for j in range(len(family)):
     for k in range(len(family)):
-        if family[j][1] == family[k][0] and family[j][1] != 0:
-            print(family[k],family[j][1],family[k][0])
+        if family[j][1] == family[k][0] and family[j][1] != 0:           
             family[j].append(family[k][1])
             ans.append(family[j])
 
