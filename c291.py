@@ -11,7 +11,7 @@ num = list(map(int,input().split()))
 #me[num[me[num[i]]]] -> num[me[num[me[num[i]]]]] 6 -> 8
 
 
-def fr(num,i,stop,ans=0,temp=None):
+def fr(num,i,temp=None):
     if temp is None:
         temp = []
     ans = num[i]
@@ -19,16 +19,14 @@ def fr(num,i,stop,ans=0,temp=None):
     if num[i] == 0:
         return temp
     else:
-        return fr(num,ans,ans,temp)
+        return fr(num,ans,temp)
     
     
-k = 0
+    
 
-for i in range(a):
-    aa = fr(num,0,num[i])
-    print(aa)
 
-print(k)
+aa = fr(num,0)
+print(aa)
 
     
     
