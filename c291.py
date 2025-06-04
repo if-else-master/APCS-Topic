@@ -11,22 +11,26 @@ num = list(map(int,input().split()))
 #me[num[me[num[i]]]] -> num[me[num[me[num[i]]]]] 6 -> 8
 
 
-def fr(num,i,temp=None):
+def fr(num,i,stop,temp=None):
     if temp is None:
         temp = []
     ans = num[i]
     temp.append(num[i])
-    if num[i] == 0:
+    if num[i] == stop:
         return temp
     else:
-        return fr(num,ans,temp)
+        return fr(num,ans,stop,temp)
     
     
     
+cut = []
 
-
-aa = fr(num,0)
-print(aa)
+for i in range(a):
+    aa = fr(num,num[i],num[i])
+    cut.append(aa)
+    print(cut)
+#aa = fr(num,0)
+#print(len(cut))
 
     
     
