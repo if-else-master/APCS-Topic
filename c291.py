@@ -24,11 +24,16 @@ def fr(num,i,stop,temp=None):
     
     
 cut = []
+seen = set()
 
 for i in range(a):
     aa = fr(num,num[i],num[i])
-    cut.append(aa)
-    print(cut)
+    sorted_seen = tuple(sorted(aa))
+    if sorted_seen not in seen:
+        seen.add(sorted_seen)
+        cut.append(aa)
+
+print(len(cut))
 #aa = fr(num,0)
 #print(len(cut))
 
