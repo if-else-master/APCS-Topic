@@ -29,3 +29,4 @@ if list_point == []:
 else:
     print(' '.join(map(str,list_point)))
     
+print(N,M)
