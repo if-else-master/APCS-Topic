@@ -18,20 +18,30 @@ def sn(listo,listt,num=None):
         for i in range(len(listo)):
             for j in range(len(listt)):
                 if listo[i]*listt[j] == num:           
-                    listo.remove(max(listo))
-                    listt.remove(max(listt))                   
+                    listo.remove(listo[i])
+                    listt.remove(listt[j])                   
                     return sn(listo,listt,num)
                     break
-        
-    for i in range(len(listo)):
-        for j in range(len(listt)):
-            if listo[i]*listt[j]+num > num:
-                num = num+listo[i]*listt[j]                
-                listo.remove(listo[i])
-                listt.remove(listt[j])                
-                return sn(listo,listt,num)
-            else:
-                continue
+    temp2 = []
+    for k in range(len(listo)):
+        for h in range(len(listt)):
+            temp2.append(listo[k]*listt[h])
+            
+    if not temp2:
+        return num  # 如果沒有可乘的對，直接回傳結果
+
+    
+    aa = max(temp2)
+    if num+max(temp2) > num:
+        for i in range(len(listo)):
+            for j in range(len(listt)):
+                if listo[i]*listt[j] == aa:
+                    num = num+max(temp2)              
+                    listo.remove(listo[i])
+                    listt.remove(listt[j])                
+                    return sn(listo,listt,num)
+                else:
+                    continue
     return num
                 
 print(sn(listo,listt))
