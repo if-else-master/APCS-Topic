@@ -1,42 +1,14 @@
-number = int(input())
-w1, w2, h1, h2 = map(int,input().split())
-
-water = list(map(int,input().split()))
-
-ans = 0
-aa = 0
-max_num = []
-
-
-
-for i in range(number):
-    cm2_down = w1**2 * h1
-    cm2_up = w2**2 * h2
-    if cm2_down + cm2_up <= water[i]:
-        ans = h1+h2
-        max_num.append(int(ans))
-    elif cm2_down + cm2_up > water[i]:
-        if water[i] > cm2_down and i == 0:
-            ans = (water[i] - cm2_down) / w2**2
-            ans = ans+h1
-            max_num.append(int(ans))
-        elif water[i] <= cm2_down and i == 0:
-            ans = water[i] / w1**2
-            max_num.append(int(ans))        
-
-        if i > 0:
-            if max_num[i-1] > h1:
-                aa = max_num[i-1] - h1
-                cmp2_up = w2**2 * (h2-aa)            
-                ans = (cmp2_up - water[i]) / w2 ** 2
-                max_num.append(int(ans))            
-            elif max_num[i-1] <= h1:
-                aa = h1 - max_num[i-1]
-                bb = w1**2 * aa
-                dd = water[i] - bb
-                ans = dd / w2**2
-                max_num.append(int(ans))
-
-print(max(max_num))
-    
-    
+n=int(input())
+w1,w2,h1,h2=map(int,input().split())
+drinks=list(map(int,input().split()))
+high,ans=0,0#初始目前高度，答案為0
+for item in drinks:
+    if high<h1:#從第一杯裝
+        up=min(item//(w1**2),h1-high)#如果裝入後超過第一杯高度，增加高度設為(第一杯高度減目前高度)
+        item-=(up)*(w1**2)
+        if item>0:up+=min(item//(w2**2),h2)#有剩的飲料，裝入第二杯。
+    elif h1<=high<h1+h2:up=min(item//(w2**2),h1+h2-high)
+    else:break#剩下為0，不必判斷
+    ans=max(ans,up)
+    high+=up
+print(ans)
